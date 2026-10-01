@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 分析 | AI股票分析</title>
+  <meta name="description" content="AI行情监控与买卖参考：风险测评、多指标趋势评分、自选股实时监控与异动预警。" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="mark">智</span>
+        <span class="text">AI股票分析</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="knowledge.html">新手指南</a>
+        <a href="ai.html">AI 分析</a>
+        <a href="#monitor">行情监控</a>
+        <a href="#lowrisk">低风险池</a>
+        <a href="#holdings">我的持仓</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container section">
+    <h1 class="section-title" style="font-size:32px">AI 智能分析</h1>
+    <p class="section-sub">先做风险测评了解自己，再用 AI 辅助判断行情与个股。行情为真实数据，模型为公开规则计算。</p>
+
+    <div class="disclaimer">
+      <strong>合规声明：</strong>本页所有 AI 输出均为基于公开数据的<strong>辅助参考</strong>，不构成投资建议或收益承诺。
+      请务必结合自身情况独立决策，股市有风险，入市需谨慎。
+    </div>
+
+    <!-- ① 风险测评 -->
+    <section class="panel" style="margin-bottom:22px">
+      <h3>① 风险承受能力测评</h3>
+      <p class="muted">回答 4 个问题，帮你明确适合的投资风格和仓位上限。</p>
+      <form id="risk-form">
+        <div class="grid grid-2">
+          <div class="form-row">
+            <label>1. 你的投资资金占家庭可支配资产比例？</label>
+            <select name="q1">
+              <option value="1">10% 以内（闲钱）</option>
+              <option value="2">10%–30%</option>
+              <option value="3">30%–50%</option>
+              <option value="4">超过 50%</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>2. 若持仓一个月内下跌 20%，你会？</label>
+            <select name="q2">
+              <option value="1">立即全部卖出止损</option>
+              <option value="2">卖出一部分观察</option>
+              <option value="3">继续持有等回本</option>
+              <option value="4">加仓摊低成本</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>3. 你的投资经验？</label>
+            <select name="q3">
+              <option value="1">完全没接触过</option>
+              <option value="2">买过货币/债券基金</option>
+              <option value="3">买过股票或股票基金</option>
+              <option value="4">有多年实盘经验</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>4. 你期望的年化收益？</label>
+            <select name="q4">
+              <option value="1">与存款相当即可（3%–5%）</option>
+              <option value="2">跑赢通胀（5%–10%）</option>
+              <option value="3">10%–20%</option>
+              <option value="4">追求 20% 以上</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" type="submit">生成我的风险画像</button>
+      </form>
+      <div id="risk-result" style="display:none;margin-top:20px"></div>
+    </section>
+
+    <!-- ② AI 个股分析 -->
+    <section class="section" id="advice">
+      <h2 class="section-title" style="font-size:22px">② AI 个股分析</h2>
+      <p class="section-sub">综合均线、RSI、区间位置与量能，给出趋势评分、信号与风险提示。</p>
+      <div class="panel">
+        <form id="advice-form" class="advice-form">
+          <div class="form-row">
+            <label>股票代码</label>
+            <input id="stock-code" type="text" placeholder="例如：600519" />
+          </div>
+          <div class="form-row">
+            <label>计划持有周期</label>
+            <select id="horizon">
+              <option>短线（1 周内）</option>
+              <option selected>中线（1–3 个月）</option>
+              <option>长线（半年以上）</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" type="submit">开始 AI 分析</button>
+        </form>
+        <div id="advice-result" style="display:none;margin-top:22px"></div>
+      </div>
+    </section>
+
+    <!-- ③ 行情监控 -->
+    <section class="section" id="monitor">
+      <h2 class="section-title" style="font-size:22px">③ 行情监控面板</h2>
+      <p class="section-sub">自选股每 12 秒自动刷新，触发涨跌幅阈值时给出预警。</p>
+      <div class="panel">
+        <div class="monitor-head">
+          <div class="field-inline">
+            <input id="watch-input" type="text" placeholder="输入 6 位代码，如 600519" />
+            <button class="btn btn-primary" id="watch-add" type="button">加入监控</button>
+          </div>
+          <div class="field-inline">
+            <label for="alert-threshold">预警阈值 ±%</label>
+            <input id="alert-threshold" type="number" value="3" min="1" max="20" step="0.5" />
+            <span class="muted" id="watch-updated"></span>
+          </div>
+        </div>
+
+        <div id="alert-log" class="alert-log" style="display:none"></div>
+
+        <table class="watch-table">
+          <thead>
+            <tr>
+              <th>名称</th><th>代码</th><th>现价</th><th>涨跌幅</th><th>成交额</th><th>状态</th><th></th>
+            </tr>
+          </thead>
+          <tbody id="watch-body"></tbody>
+        </table>
+        <p id="watch-empty" class="muted">暂无监控标的。添加后会立即拉取真实行情并自动刷新。</p>
+      </div>
+    </section>
+
+    <!-- ④ 新手低风险参考池 -->
+    <section class="section" id="lowrisk">
+      <h2 class="section-title" style="font-size:22px">④ 新手低风险参考池</h2>
+      <p class="section-sub">在知名蓝筹样本中，按历史波动率、最大回撤与流动性量化筛选，作为新手学习观察的起点。</p>
+      <div class="panel">
+        <div class="lr-head">
+          <span class="muted" id="lowrisk-updated">加载中…</span>
+          <button class="btn" id="lowrisk-refresh" type="button">重新筛选</button>
+        </div>
+        <div class="lowrisk-grid" id="lowrisk-list"></div>
+        <div class="callout warn" id="lowrisk-note" style="margin-top:6px"></div>
+      </div>
+    </section>
+
+    <!-- ⑤ 我的持仓与卖出提示 -->
+    <section class="section" id="holdings">
+      <h2 class="section-title" style="font-size:22px">⑤ 我的持仓与卖出提示</h2>
+      <p class="section-sub">录入买入价与数量，系统每 12 秒用真实行情监控，并按止盈止损与均线规则给出参考动作。</p>
+      <div class="panel">
+        <form id="hold-form" class="hold-form">
+          <div class="form-row">
+            <label>股票代码</label>
+            <input id="hold-code" type="text" placeholder="6 位代码" />
+          </div>
+          <div class="form-row">
+            <label>买入价</label>
+            <input id="hold-cost" type="number" step="0.001" min="0" placeholder="如 12.50" />
+          </div>
+          <div class="form-row">
+            <label>数量（股）</label>
+            <input id="hold-qty" type="number" step="1" min="1" placeholder="如 1000" />
+          </div>
+          <div class="form-row">
+            <label>买入日期</label>
+            <input id="hold-date" type="date" />
+          </div>
+          <button class="btn btn-primary" type="submit">加入持仓监控</button>
+        </form>
+
+        <div class="hold-summary" id="hold-summary" style="display:none"></div>
+        <div class="hold-grid" id="hold-list"></div>
+        <p id="hold-empty" class="muted">暂无持仓记录。录入后自动监控并给出止盈止损参考。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 AI股票分析 · 学习交流平台</span>
+      <span><a href="index.html">返回首页</a></span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
