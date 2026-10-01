@@ -1,0 +1,2 @@
+# 本项目仅使用 Python 标准库，无第三方依赖。
+# 该文件用于让 Render/Railway 等平台识别为 Python 项目并安装依赖。
