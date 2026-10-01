@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+*.egg-info/
+
+# 环境变量与密钥
+.env
+.env.*
+
+# 编辑器 / 系统
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# 与本网站无关的本地工具文件（勿提交）
+auto-login.ps1
+setup.ps1
+uninstall.bat
+opencode.json
