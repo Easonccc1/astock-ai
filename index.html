@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI 股票分析 | A股智能决策助手</title>
+  <meta name="description" content="以AI为核心的A股分析平台：个股智能评分、实时行情监控、持仓卖出提示与低风险参考池，附新手金融指南。" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="logo" href="index.html">
+        <span class="mark">智</span>
+        <span class="text">AI股票分析</span>
+      </a>
+      <nav class="nav-links">
+        <a href="index.html">首页</a>
+        <a href="ai.html">AI 分析</a>
+        <a href="knowledge.html">新手指南</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero：AI 为核心 -->
+    <section class="hero container">
+      <span class="hero-eyebrow">AI 驱动 · 实时行情 · 无需注册</span>
+      <h1>输入股票代码，<br /><span class="grad">让 AI 帮你读懂它</span></h1>
+      <p class="lead">
+        综合均线、RSI、量能、区间位置与支撑压力，自动生成趋势评分、数据解读与分周期操作参考。
+        还能监控自选股、管理持仓、给出止盈止损提示。
+      </p>
+
+      <form class="quick-search" id="home-search">
+        <input id="home-code" type="text" placeholder="输入 6 位股票代码，如 600519" />
+        <button class="btn btn-primary" type="submit">AI 分析</button>
+      </form>
+      <p class="hero-links">第一次来？<a href="knowledge.html">先花 10 分钟看看新手指南 →</a></p>
+    </section>
+
+    <!-- 实时行情条 -->
+    <section class="container section" style="padding-top:8px">
+      <div class="quotes" id="market-quotes"></div>
+    </section>
+
+    <!-- 核心功能：AI -->
+    <section class="container section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">AI 核心能力</h2>
+          <p class="section-sub" style="margin-bottom:0">从看懂一只股票，到管好一整个持仓，AI 全程辅助。</p>
+        </div>
+        <a class="btn btn-primary" href="ai.html">进入 AI 分析台</a>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:24px">
+        <a class="feature-card" href="ai.html#advice">
+          <span class="icon">🤖</span>
+          <h3>智能个股分析</h3>
+          <p>趋势评分、均线/RSI/量能逐项白话解读、支撑压力位与操作参考，帮你读懂数据背后的含义。</p>
+          <span class="go">立即分析 →</span>
+        </a>
+        <a class="feature-card" href="ai.html#monitor">
+          <span class="icon">📈</span>
+          <h3>行情监控 + 异动预警</h3>
+          <p>自选股 12 秒自动刷新，涨跌幅突破阈值立即预警，放量、异动一目了然。</p>
+          <span class="go">添加监控 →</span>
+        </a>
+        <a class="feature-card" href="ai.html#holdings">
+          <span class="icon">🎯</span>
+          <h3>持仓管理与卖出提示</h3>
+          <p>录入买入价与数量，自动计算盈亏，并按止盈止损、均线、RSI 规则提示买卖参考点。</p>
+          <span class="go">管理持仓 →</span>
+        </a>
+        <a class="feature-card" href="ai.html#lowrisk">
+          <span class="icon">🛡️</span>
+          <h3>新手低风险参考池</h3>
+          <p>按历史波动率、最大回撤与流动性量化筛选稳健标的，作为新手学习观察的起点。</p>
+          <span class="go">查看参考池 →</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 辅助：新手指南 -->
+    <section class="container section secondary-section">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title" style="font-size:20px">新手指南（辅助阅读）</h2>
+          <p class="section-sub" style="margin-bottom:0">不懂术语也没关系，这里用大白话讲清基础。</p>
+        </div>
+        <a href="knowledge.html">完整知识库 →</a>
+      </div>
+      <div class="mini-grid">
+        <a class="mini-card" href="knowledge.html#s2">交易规则<span>开户、T+1、涨跌停、费用</span></a>
+        <a class="mini-card" href="knowledge.html#s4">看懂行情<span>K线、成交量、分时图</span></a>
+        <a class="mini-card" href="knowledge.html#s6">估值指标<span>PE、PB、ROE、股息率</span></a>
+        <a class="mini-card" href="knowledge.html#s9">风险管理<span>仓位、止损、分散</span></a>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="disclaimer">
+        <strong>风险提示：</strong>股市有风险，入市需谨慎。本平台内容仅用于金融知识科普与学习交流，
+        AI 输出为基于公开数据的辅助参考，不构成任何投资建议。请根据自身风险承受能力独立决策，盈亏自负。
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span>© 2026 AI 股票分析 · 学习交流平台</span>
+      <span>行情来自公开数据接口，AI 分析仅供学习参考</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
