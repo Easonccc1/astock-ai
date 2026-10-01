@@ -1,0 +1,13 @@
+# Render 一键部署配置（Blueprint）
+# 在 Render 控制台选择 "New +" -> "Blueprint"，关联本仓库即可自动读取本文件。
+services:
+  - type: web
+    name: astock-ai
+    runtime: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python server.py"
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
